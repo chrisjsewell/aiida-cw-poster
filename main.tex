@@ -1,7 +1,7 @@
 \documentclass[final]{beamer}
 \mode<presentation>{\usetheme{MARVEL}}
 \usepackage[english]{babel}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -19,8 +19,8 @@
   % breaklines=true,
   % postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
   xleftmargin=2em,
-  aboveskip=1em,
-  belowskip=1em,
+  aboveskip=0em,
+  belowskip=0em,
 }
 \usefonttheme[onlymath]{serif}
 %\setbeamertemplate{caption}[numbered]
@@ -35,8 +35,37 @@
 
 % header
 \title{ \textbf{\LARGE AiiDA common workflows for computing material properties using different quantum engines} } 
-\author{ \textbf{\large \underline{S.P. Huber},$^1$ \textit{et al}} }
-\institute{$^1$THEOS and NCCR-MARVEL, \'Ecole Polytechnique F\'ed\'erale de Lausanne (EPFL), Lausanne, Switzerland}
+% \author{ \textbf{\large \underline{S.P. Huber},$^1$ \textit{et al}} }
+\author{\small 
+  \underline{S.P. Huber}\textsuperscript{1},
+  E. Bosoni\textsuperscript{2},
+  M. Bercx\textsuperscript{1},
+  J. Bröder\textsuperscript{3,4},
+  A. Degomme\textsuperscript{5},
+  V. Dikan\textsuperscript{2},
+  K. Eimre\textsuperscript{6},
+  E. Flage-Larsen\textsuperscript{7,8},
+  A. Garcia\textsuperscript{2},
+  L. Genovese\textsuperscript{5},
+  D. Gresch\textsuperscript{9},
+  C. Johnston\textsuperscript{10},
+  G. Petretto\textsuperscript{11},
+  S. Poncé\textsuperscript{1},
+  G. Rignanese\textsuperscript{11},
+  C. Sewell\textsuperscript{1},
+  B. Smit\textsuperscript{12},
+  V. Tseplyaev\textsuperscript{3,4},
+  M. Uhrin\textsuperscript{1},
+  D. Wortmann\textsuperscript{3},
+  A. Yakutovich\textsuperscript{1,12},
+  A. Zadoks\textsuperscript{1},
+  P. Zarabadi-Poor\textsuperscript{13,14},
+  B. Zhu\textsuperscript{114,15},
+  N. Marzari\textsuperscript{1}, 
+  G. Pizzi\textsuperscript{1} 
+}
+% \institute{$^1$THEOS and NCCR-MARVEL, \'Ecole Polytechnique F\'ed\'erale de Lausanne (EPFL), Lausanne, Switzerland}
+\institute{a}
 
 \begin{document}
 
@@ -50,11 +79,11 @@
       %
       \begin{block}{\centering\textbf{\nextblocknum. Objectives}}
         \textbox{
-          The prediction of material properties based on density-functional theory has become routine,
+          The prediction of materials properties based on density-functional theory has become routine,
           thanks, in part, to the steady increase in the number and robustness of available simulation packages.
           This diversity of codes and theoretical methods allows scientists the possibility to select the optimal capabilities for their research but,
           conversely, makes it challenging to cross-verify results and combine multiple levels of theory into single workflows.
-          We demonstrate how developing common interfaces for workflows, built on the AiiDA framework, that automatically compute material properties greatly simplifies interoperability and cross-verification.
+          We demonstrate how developing common interfaces for workflows, built on the AiiDA framework, that automatically compute materials properties greatly simplifies interoperability and cross-verification.
         }
       \end{block}
       %
@@ -90,29 +119,29 @@
           by providing an infrastructure for designing and running complex workflows,
           automatically tracking each step and organising the full history (its provenance) in an easy to query database.\textsuperscript{2}
           %
-          \vspace{1em}
+          \vspace{0.5em}
           %
           \begin{figure}[h]
             \centering
             \includegraphics[width=0.6\textwidth]{aiida-logo}
           \end{figure}
           %
-          \vspace{1em}
+          \vspace{0.5em}
           %
           \begin{table}[h]
             \centering
             \begin{tabularx}{0.95\textwidth}{lLRr}
-              \large{\faIcon{cog}}\hspace{0.3em}    & \textbf{Scalable workflow engine}       & \textbf{Automated data provenance} & \hspace{0.3em}\large{\faIcon{database}} \\
-              \large{\faIcon{server}}\hspace{0.3em} & \textbf{Built-in support for HPCs}      & \textbf{Flexible plugin system}    & \hspace{0.3em}\large{\faIcon{plug}}     \\
+              \large{\faIcon{cog}}\hspace{0.3em}    & \textbf{Scalable workflow engine}      & \textbf{Automated data provenance} & \hspace{0.3em}\large{\faIcon{database}} \\
+              \large{\faIcon{server}}\hspace{0.3em} & \textbf{Built-in support for HPCs}     & \textbf{Flexible plugin system}    & \hspace{0.3em}\large{\faIcon{plug}}     \\
               \large{\faIcon{python}}\hspace{0.3em} & \textbf{Python API\textsuperscript{3}} & \textbf{Open Source}               & \hspace{0.3em}\large{\faIcon{osi}}      \\
             \end{tabularx}
           \end{table}
           %
-          \vspace{1em}
+          \vspace{0.5em}
           %
           \begin{figure}[h]
             \centering
-            \includegraphics[width=0.55\textwidth]{provenance}
+            \includegraphics[width=0.75\textwidth]{provenance-complex}
           \end{figure}
         }
       \end{block}
@@ -144,20 +173,25 @@
     \begin{column}{.48\textwidth}
       %
       \begin{block}{\centering\textbf{\nextblocknum. Quantum Codes}}
+        \begin{figure}[h]
+          \centering
+          \includegraphics[width=0.96\textwidth]{cw-calculator_plus_registry}
+        \end{figure}
+        %
+        \vskip 1 em
+        %
         \textbox{
-          The AiiDA plugin registry provides \textbf{100+ currently supported codes}, and 120+ workflows.\textsuperscript{4}\\
-          The aiida-common-workflows package provides a simple CLI,\textsuperscript{5} for running the workflows, using any of \textbf{eleven} quantum codes:
+          \noindent
+          \begin{itemize}
+            \item The AiiDA plugin registry provides \textbf{100+ currently supported codes}, and 120+ workflows.\textsuperscript{4}
+            \item The aiida-common-workflows package provides a simple CLI,\textsuperscript{5} for running the workflows, using any of \textbf{eleven} quantum codes:
+          \end{itemize}
         }
         %
         \begin{lstlisting}[language=bash]
 $ aiida-common-workflows \
     launch eos siesta --structure=Al --protocol=precise
         \end{lstlisting}
-        %
-        \begin{figure}[h]
-          \centering
-          \includegraphics[width=0.98\textwidth]{codes}
-        \end{figure}
       \end{block}
       %
       \vskip 0.2 cm
@@ -175,8 +209,8 @@ $ aiida-common-workflows \
           %
           \begin{figure}[h]
             \centering
-            \includegraphics[width=0.9\textwidth]{results_eos1}
-            \includegraphics[width=0.9\textwidth]{results_eos2}
+            \includegraphics[width=0.87\textwidth]{results_eos1}
+            \includegraphics[width=0.87\textwidth]{results_eos2}
             \caption{Results obtained for the Equation of State workflows}
           \end{figure}
           %
@@ -214,7 +248,7 @@ $ aiida-common-workflows \
         \textbox[\small]{
           %
           \begin{enumerate}
-            \item S.P. Huber \textit{et al}, npj Comput Mater 7, 136 (2021). DOI:~\href{https://doi.org/10.1038/s41524-021-00594-6}{10.1038/s41524-021-00594-6}.
+            \item S.P. Huber \textit{et al}, npj Comp. Mat. 7, 136 (2021). DOI:~\href{https://doi.org/10.1038/s41524-021-00594-6}{10.1038/s41524-021-00594-6}.
             \item M. Uhrin \textit{et al}, Comp. Mat. Sci., 136 (2021). DOI:~\href{https://doi.org/10.1016/j.commatsci.2020.110086}{10.1016/j.commatsci.2020.110086}.
             \item \href{https://github.com/aiidateam/aiida-core}{https://github.com/aiidateam/aiida-core}
             \item \href{https://aiidateam.github.io/aiida-registry/}{https://aiidateam.github.io/aiida-registry/}
@@ -232,7 +266,11 @@ $ aiida-common-workflows \
       \begin{block}{\centering\textbf{\nextblocknum. Acknowledgments}}
         %
         \textbox[\small]{
-          \parbox{38cm}{This research was supported by the Swiss National Science Foundation (SNSF), through Grant No.~51NF40--182892, and its National Centre of Competence in Research (NCCR) MARVEL, the European H2020 Intersect project through Grant No.~824143~\&~814487.}
+          \parbox{38cm}{
+            This research was supported by the Swiss National Science Foundation (SNSF), through Grant No.~51NF40--182892,
+            and its National Centre of Competence in Research (NCCR) MARVEL,
+            the European H2020 Intersect project through Grant No.~824143 (European MaX Centre of Excellence “Materials design at the Exascale”) and No.~814487 (INTERSECT project).
+          }
         }
         %
       \end{block}
