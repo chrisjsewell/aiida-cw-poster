@@ -9,6 +9,8 @@
 \usepackage{tabularx}
 \usepackage{fontawesome5}
 \usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{fit, positioning}
 \usepackage[orientation=portrait,size=a0,scale=1.414,debug]{beamerposter}
 
 % setup
@@ -62,7 +64,8 @@
   P. Zarabadi-Poor\textsuperscript{13,14},
   B. Zhu\textsuperscript{114,15},
   N. Marzari\textsuperscript{1}, 
-  G. Pizzi\textsuperscript{1} 
+  G. Pizzi\textsuperscript{1}
+  (see ref.~1 for affiliations)
 }
 % \institute{$^1$THEOS and NCCR-MARVEL, \'Ecole Polytechnique F\'ed\'erale de Lausanne (EPFL), Lausanne, Switzerland}
 \institute{a}
@@ -117,7 +120,7 @@
         \textbox{
           The AiiDA framework addresses these challenges,
           by providing an infrastructure for designing and running complex workflows,
-          automatically tracking each step and organising the full history (its provenance) in an easy to query database.\textsuperscript{2}
+          automatically tracking each step and organising the full history (its provenance) in an easy to query database.\textsuperscript{2,3}
           %
           \vspace{0.5em}
           %
@@ -141,7 +144,17 @@
           %
           \begin{figure}[h]
             \centering
-            \includegraphics[width=0.75\textwidth]{provenance-complex}
+            \resizebox{0.88\textwidth}{!}{
+              \begin{tikzpicture}
+                \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{provenance-complex}};
+                \node[anchor=south east,inner sep=0,fit=(image),
+                  label={[xshift=-210pt,yshift=140pt,align=left]south east:
+                      AiiDA Quantum Espresso\\
+                      atomic relaxation and\\
+                      band structure workflow.
+                    }] (text) {};
+              \end{tikzpicture}
+            }
           \end{figure}
         }
       \end{block}
@@ -216,7 +229,7 @@ $ aiida-common-workflows \
           %
           \vskip 0.5 cm
           %
-          See Ref. [1] for more details and discussions.
+          See ref.~1 for more details and discussions.
         }
       \end{block}
       %
