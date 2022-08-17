@@ -42,7 +42,7 @@
 
 \begin{frame}[fragile] % note beamer needs fragile for verbatim: https://pbelmans.ncag.info/blog/2011/02/20/why-latex-beamer-needs-fragile-when-using-verbatim/
   %
-  \begin{columns}
+  \begin{columns}[t]
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLUMN 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %
@@ -54,7 +54,7 @@
           thanks, in part, to the steady increase in the number and robustness of available simulation packages.
           This diversity of codes and theoretical methods allows scientists the possibility to select the optimal capabilities for their research but,
           conversely, makes it challenging to cross-verify results and combine multiple levels of theory into single workflows.
-          We demonstrate how developing common interfaces for workflows that automatically compute material properties greatly simplifies interoperability and cross-verification.
+          We demonstrate how developing common interfaces for workflows, built on the AiiDA framework, that automatically compute material properties greatly simplifies interoperability and cross-verification.
         }
       \end{block}
       %
@@ -86,7 +86,9 @@
       %
       \begin{block}{\centering\textbf{\nextblocknum. AiiDA framework}}
         \textbox{
-          The AiiDA framework provides an infrastructure for running complex workflows, automatically tracking each step and organising the full history and results in an easy to query database.
+          The AiiDA framework addresses these challenges,
+          by providing an infrastructure for designing and running complex workflows,
+          automatically tracking each step and organising the full history (its provenance) in an easy to query database.\textsuperscript{2}
           %
           \vspace{1em}
           %
@@ -100,9 +102,9 @@
           \begin{table}[h]
             \centering
             \begin{tabularx}{0.95\textwidth}{lLRr}
-              \large{\faIcon{cog}}\hspace{0.3em}    & \textbf{Scalable workflow engine} & \textbf{Automated data provenance} & \hspace{0.3em}\large{\faIcon{database}} \\
-              \large{\faIcon{server}}\hspace{0.3em} & \textbf{Built-in support for HPC} & \textbf{Flexible plugin system}    & \hspace{0.3em}\large{\faIcon{plug}}     \\
-              \large{\faIcon{python}}\hspace{0.3em} & \textbf{Python API}               & \textbf{Open Source}               & \hspace{0.3em}\large{\faIcon{osi}}      \\
+              \large{\faIcon{cog}}\hspace{0.3em}    & \textbf{Scalable workflow engine}       & \textbf{Automated data provenance} & \hspace{0.3em}\large{\faIcon{database}} \\
+              \large{\faIcon{server}}\hspace{0.3em} & \textbf{Built-in support for HPCs}      & \textbf{Flexible plugin system}    & \hspace{0.3em}\large{\faIcon{plug}}     \\
+              \large{\faIcon{python}}\hspace{0.3em} & \textbf{Python API\textsuperscript{3}} & \textbf{Open Source}               & \hspace{0.3em}\large{\faIcon{osi}}      \\
             \end{tabularx}
           \end{table}
           %
@@ -123,14 +125,14 @@
           \begin{itemize}
             \item Two-stage \textit{opaque transparency} design, to make it both easy for a non-expert to run, and customisable for expert users.
             \item Automatic parameter determination, using protocol ``names''.
-            \item Automated handling of failure modes (timeout, convergence, \ldots).
+            \item Automated handling of known failure modes (timeout, convergence, \ldots).
           \end{itemize}
           %
           \vskip 0.2 cm
           %
           \begin{figure}[h]
             \centering
-            \includegraphics[width=0.6\textwidth]{common-interface}
+            \includegraphics[width=0.92\textwidth]{common-interface}
             \caption{Schematic diagram of the common relax workflow interface.}
           \end{figure}
         }
@@ -141,9 +143,10 @@
     %
     \begin{column}{.48\textwidth}
       %
-      \begin{block}{\centering\textbf{\nextblocknum. Quantum codes}}
+      \begin{block}{\centering\textbf{\nextblocknum. Quantum Codes}}
         \textbox{
-          The aiida-common-worflows package provides a simple CLI,\textsuperscript{3} for running the workflows, using any of the \textbf{eleven} quantum codes:
+          The AiiDA plugin registry provides \textbf{100+ currently supported codes}, and 120+ workflows.\textsuperscript{4}\\
+          The aiida-common-workflows package provides a simple CLI,\textsuperscript{5} for running the workflows, using any of \textbf{eleven} quantum codes:
         }
         %
         \begin{lstlisting}[language=bash]
@@ -165,7 +168,7 @@ $ aiida-common-workflows \
           \noindent
           \begin{itemize}
             \item Simple cases tested for representative atomic systems: insulator (Si), metal (Al), multi-element (GeTe), magnetic (Fe).
-            \item Demonstrates good levels of agreement between the results of the different codes.
+            \item Demonstrates proof-of-principle for structural relaxation and equations of state workflows.
           \end{itemize}
           %
           \vskip 1 cm
@@ -195,7 +198,7 @@ $ aiida-common-workflows \
             \item Open-source, robust turn-key workflows developed for computing materials properties, using the AiiDA framework.
             \item Common interface among 11 quantum engines.
             \item Easy to use, but flexible for experts, designed to be interfaced to GUIs.
-            \item Basis of verification studies (oxides set), and starting point for more common workflows.
+            \item Basis of verification studies (oxides set), and starting point for more common workflows (band-structure, (P)DOS, phonon, \ldots).
           \end{itemize}
           %
         }
@@ -213,8 +216,9 @@ $ aiida-common-workflows \
           \begin{enumerate}
             \item S.P. Huber \textit{et al}, npj Comput Mater 7, 136 (2021). DOI:~\href{https://doi.org/10.1038/s41524-021-00594-6}{10.1038/s41524-021-00594-6}.
             \item M. Uhrin \textit{et al}, Comp. Mat. Sci., 136 (2021). DOI:~\href{https://doi.org/10.1016/j.commatsci.2020.110086}{10.1016/j.commatsci.2020.110086}.
-            \item \href{https://github.com/aiidateam/aiida-common-workflows}{https://github.com/aiidateam/aiida-common-workflows}
             \item \href{https://github.com/aiidateam/aiida-core}{https://github.com/aiidateam/aiida-core}
+            \item \href{https://aiidateam.github.io/aiida-registry/}{https://aiidateam.github.io/aiida-registry/}
+            \item \href{https://github.com/aiidateam/aiida-common-workflows}{https://github.com/aiidateam/aiida-common-workflows}
           \end{enumerate}
           %
         }
