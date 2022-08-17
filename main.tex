@@ -98,17 +98,17 @@
           \begin{itemize}
             \item Workflow automation
                   \begin{itemize}
-                    \item Need tools to define complex workflows with advanced error handling
-                    \item An automated, robust and scalable engine to run the workflows
+                    \item Need tools to define complex workflows with advanced error handling.
+                    \item An automated, robust and scalable engine to run the workflows.
                   \end{itemize}
             \item Data management
                   \begin{itemize}
-                    \item Data should be stored reliably and efficiently
-                    \item Stored data should be interoperable and queryable
+                    \item Data should be stored reliably and efficiently.
+                    \item Stored data should be interoperable and queryable.
                   \end{itemize}
             \item Reproducibility
                   \begin{itemize}
-                    \item All produced data should be reproducible by storing the full provenance
+                    \item All produced data should be reproducible by storing the full provenance.
                   \end{itemize}
           \end{itemize}
         }
@@ -126,14 +126,14 @@
           %
           \begin{figure}[h]
             \centering
-            \includegraphics[width=0.6\textwidth]{aiida-logo}
+            \includegraphics[width=0.57\textwidth]{aiida-logo}
           \end{figure}
           %
           \vspace{0.5em}
           %
           \begin{table}[h]
             \centering
-            \begin{tabularx}{0.95\textwidth}{lLRr}
+            \begin{tabularx}{0.95\textwidth}{cLRc}
               \large{\faIcon{cog}}\hspace{0.3em}    & \textbf{Scalable workflow engine}      & \textbf{Automated data provenance} & \hspace{0.3em}\large{\faIcon{database}} \\
               \large{\faIcon{server}}\hspace{0.3em} & \textbf{Built-in support for HPCs}     & \textbf{Flexible plugin system}    & \hspace{0.3em}\large{\faIcon{plug}}     \\
               \large{\faIcon{python}}\hspace{0.3em} & \textbf{Python API\textsuperscript{3}} & \textbf{Open Source}               & \hspace{0.3em}\large{\faIcon{osi}}      \\
@@ -148,10 +148,11 @@
               \begin{tikzpicture}
                 \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{provenance-complex}};
                 \node[anchor=south east,inner sep=0,fit=(image),
-                  label={[xshift=-210pt,yshift=140pt,align=left]south east:
+                  label={[xshift=-210pt,yshift=185pt,align=left]south east:
                       AiiDA Quantum Espresso\\
                       atomic relaxation and\\
-                      band structure workflow.
+                      band structure\\
+                      workflow provenance.
                     }] (text) {};
               \end{tikzpicture}
             }
@@ -174,7 +175,7 @@
           %
           \begin{figure}[h]
             \centering
-            \includegraphics[width=0.92\textwidth]{common-interface}
+            \includegraphics[width=0.92\textwidth,trim=0 10 0 0,clip]{common-interface}
             \caption{Schematic diagram of the common relax workflow interface.}
           \end{figure}
         }
